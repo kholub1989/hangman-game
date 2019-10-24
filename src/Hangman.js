@@ -20,6 +20,15 @@ class Hangman extends Component {
     super(props);
     this.state = { nWrong: 0, guessed: new Set(), answer: randomWord() };
     this.handleGuess = this.handleGuess.bind(this);
+    this.reset = this.reset.bind(this);
+  }
+
+  reset() {
+    this.setState({
+      nWrong: 0,
+      guessed: new Set(),
+      answer: randomWord()
+    });
   }
 
   /** guessedWord: show current-state of word:
@@ -42,6 +51,7 @@ class Hangman extends Component {
       nWrong: st.nWrong + (st.answer.includes(ltr) ? 0 : 1)
     }));
   }
+
 
   /** generateButtons: return array of letter buttons to render */
   generateButtons() {
@@ -79,6 +89,7 @@ class Hangman extends Component {
           ? this.generateButtons() 
           : 'You Lose!'}
         </p>
+        <button onClick={this.reset}>Restart?</button>
       </div>
     );
   }
